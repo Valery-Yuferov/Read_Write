@@ -1,11 +1,15 @@
 
 from pprint import pprint
 
+
+# Задача №1
+
 file_name = "recipe.txt"
 
 
 def file_reader(file_name):
     with open(file_name, encoding='utf-8') as file_obj:
+        global cookbook
         cookbook = {}
         for line in file_obj:
             dish_name = line.strip()
@@ -20,4 +24,61 @@ def file_reader(file_name):
 
 dishes = file_reader(file_name)
 pprint(dishes)
+print()
+
+
+# Задача №2
+
+def get_shop_list_by_dishes(dishes, person_count):
+    result = {}
+    for dish in dishes:
+        if dish in cookbook:
+            for ingredient in cookbook[dish]:
+                if ingredient['ingredient_name'] in result:
+                    result[ingredient['ingredient_name']]['quantity'] += ingredient['quantity'] * person_count
+                else:
+                    result[ingredient['ingredient_name']] = {'measure': ingredient['measure'],
+                                                          'quantity': (ingredient['quantity'] * person_count)}
+        else:
+            print(f'Блюда "{dish}" нет в поваренной книге')
+    return result
+
+
+dishes_list = get_shop_list_by_dishes(['Омлет', 'Омлет'], 1)
+pprint(dishes_list)
+print()
+
+
+# Задача №3
+
+
+import os
+
+dir_name = "venv"
+catalog_name = "Files_task_3"
+file_name = "merged.txt"
+
+base_path = os.getcwd()
+print(base_path)
+
+catalog_path = os.path.join(base_path, dir_name, catalog_name)
+print(catalog_path)
+
+file_name_path = os.path.join(base_path, dir_name, file_name)
+print(file_name_path)
+print(file_name)
+
+print()
+
+
+def merging():
+    entries = os.listdir(catalog_path)
+    dict_files = {}
+    dict_file = {}
+    for item in entries():
+        with open(os.listdir(catalog_path), item) as f:
+            text = f.readlines()
+            dict_file[item] = (len(text), text)
+            dict_files.update(dict_file)
+    return dict_files
 
