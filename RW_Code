@@ -70,12 +70,14 @@ print(file_name)
 
 print()
 
+# entries = os.listdir(catalog_path)
+# print(entries)
 
 def merging():
     entries = os.listdir(catalog_path)
     dict_files = {}
     dict_file = {}
-    for item in entries():
+    for item in entries[]:
         with open(os.listdir(catalog_path), item) as f:
             text = f.readlines()
             dict_file[item] = (len(text), text)
