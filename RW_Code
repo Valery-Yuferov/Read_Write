@@ -56,7 +56,7 @@ import os
 
 dir_name = "venv"
 catalog_name = "Files_task_3"
-file_name = "merged.txt"
+merged_file_name = "merged.txt"
 
 base_path = os.getcwd()
 print(base_path)
@@ -64,23 +64,29 @@ print(base_path)
 catalog_path = os.path.join(base_path, dir_name, catalog_name)
 print(catalog_path)
 
-file_name_path = os.path.join(base_path, dir_name, file_name)
-print(file_name_path)
-print(file_name)
-
+merged_file_name_path = os.path.join(base_path, dir_name, merged_file_name)
+print(merged_file_name_path)
 print()
 
-# entries = os.listdir(catalog_path)
-# print(entries)
+entries = os.listdir(catalog_path)
+print(entries)
+print()
 
-def merging():
-    entries = os.listdir(catalog_path)
-    dict_files = {}
-    dict_file = {}
-    for item in entries[]:
-        with open(os.listdir(catalog_path), item) as f:
-            text = f.readlines()
-            dict_file[item] = (len(text), text)
-            dict_files.update(dict_file)
-    return dict_files
 
+def process_files(catalog_path):
+    files = os.listdir(catalog_path)
+    files_data = {}
+    for i, catalog_path in enumerate(files):
+        if (catalog_path.find('.txt')) == -1:
+            continue
+    with open(catalog_path, 'r', encoding='cp1251') as read_file:
+        file_lines = read_file.readlines()
+        count = len(file_lines)
+        files_data["files"] = file_lines
+    sorted_data = sorted(files_data, key=count)
+    with open(merged_file_name_path, 'w', encoding='cp1251') as write_file:
+        for value in sorted_data:
+            write_file.write(str(value))
+
+if __name__ == '__main__':
+    process_files(catalog_path)
