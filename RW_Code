@@ -74,19 +74,24 @@ print()
 def process_files(catalog_path):
     files = os.listdir(catalog_path)
     files_data = {}
-    for i, catalog_path in enumerate(files):
-        if (catalog_path.find('.txt')) == -1:
-            continue
-    with open(catalog_path, 'r', encoding='cp1251') as read_file:
-        file_lines = read_file.readlines()
-        count = len(file_lines)
-        files_data["files"] = file_lines
-    sorted_data = sorted(files_data, key=count)
-    with open(merged_file_name_path, 'w', encoding='cp1251') as write_file:
-        for value in sorted_data:
-            write_file.write(str(value))
+    for filename in files:
+        if ".txt" in filename:
+            with open(os.path.join(catalog_path, filename), 'r', encoding='utf-8') as read_file:
+                file_lines = read_file.readlines()
+                count = len(file_lines)
+                files_data[filename] = (len(file_lines), file_lines)
+        else:
+            print('Нет файлов для обработки')
 
+    pprint(files_data)
 
-if __name__ == '__main__':
-    process_files(catalog_path)
+    sorted_data = sorted(files_data, count)
+    with open("merged.txt", 'w', encoding='utf-8') as write_file:
+        # for value in sorted_data:
+        write_file.write(files_data)
+
+process_files(catalog_path)
+
+# if __name__ == '__main__':
+#     process_files(catalog_path)
     
