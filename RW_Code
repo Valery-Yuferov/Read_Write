@@ -1,6 +1,4 @@
-
 from pprint import pprint
-
 
 # Задача №1
 
@@ -88,5 +86,7 @@ def process_files(catalog_path):
         for value in sorted_data:
             write_file.write(str(value))
 
+
 if __name__ == '__main__':
     process_files(catalog_path)
+    
