@@ -70,14 +70,11 @@ def process_files(base_path, catalog_path):
         files_data[filename] = count
         files_data[filename] = file_lines
     sorted_files_data = sorted(files_data.items(), key=count)
-    with open(os.path.join(dir_path, merged_file_name), 'w') as write_file:
+    with open(os.path.join(base_path, merged_file_name), 'w') as write_file:
             write_file.write('sorted_files_data')
 
 # print(files)
 
 process_files(base_path, catalog_path)
-
-
-
 
     
