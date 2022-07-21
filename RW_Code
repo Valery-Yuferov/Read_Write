@@ -49,36 +49,35 @@ print()
 
 # Задача №3
 
-
 import os
 
-dir_name = "venv"
+# Задача №3
+
 catalog_name = "Files_task_3"
 merged_file_name = "merged.txt"
 
 base_path = os.getcwd()
-dir_path = os.path.join(base_path, dir_name)
-catalog_path = os.path.join(base_path, dir_name, catalog_name)
+catalog_path = os.path.join(base_path, catalog_name)
 merged_file_name_path = os.path.join(base_path, merged_file_name)
 
-
-def process_files(base_path, dir_path, catalog_path):
+def process_files(base_path, catalog_path):
     files = os.listdir(catalog_path)
     files_data = {}
     for filename in files:
-        if ".txt" in filename:
-            with open(os.path.join(catalog_path, filename), 'r', encoding='utf-8') as read_file:
-                file_lines = read_file.readlines()
-                count = len(file_lines)
-                files_data[filename] = (count, file_lines)
-        else:
-            print('Нет файлов для обработки')
-
+      with open(os.path.join(catalog_path, filename), 'r') as read_file:
+        file_lines = read_file.readlines()
+        count = len(file_lines)
+        files_data[filename] = count
+        files_data[filename] = file_lines
     sorted_files_data = sorted(files_data.items(), key=count)
-        with open(os.path.join(dir_path, merged_file_name), 'w', encoding='utf-8') as write_file:
+    with open(os.path.join(dir_path, merged_file_name), 'w') as write_file:
             write_file.write('sorted_files_data')
 
+# print(files)
 
-process_files(base_path, dir_path, catalog_path)
+process_files(base_path, catalog_path)
+
+
+
 
     
